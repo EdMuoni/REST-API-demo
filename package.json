@@ -13,5 +13,13 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdMuoni/REST-API-demo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EdMuoni/REST-API-demo/issues"
+  },
+  "homepage": "https://github.com/EdMuoni/REST-API-demo#readme"
 }

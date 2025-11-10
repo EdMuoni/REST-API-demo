@@ -6,8 +6,8 @@ app.use(cors()); //cross origin resource error avoid
 app.use(express.json());
 
 const thingamabobs = [
-    {id: 1, name: "plumbus", price: 34.59}
-    {id: 2, name: "van furby", price: 666}
+    {id: 1, name: "plumbus", price: 34.59},
+    {id: 2, name: "van furby", price: 666},
     {id: 3, name: "sapakas", price: 2000}
 ];
 
