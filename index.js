@@ -1,6 +1,6 @@
-const express = require('express');
-const cors = require('cors');
-const app = express();
+const express = require('express'); //Rida 1 laadib sisse Express.js raamistiku, mis on populaarne Node.js põhine raamistik API-de tegemiseks.
+const cors = require('cors'); //Rida 2 laadib sisse cors paketi, mis võimaldab saata nn CORS päised päringu vastustega kaasa, mis lubavad API-t kasutada brauserist, juhul kui API server ja brauseris töötav kliendirakendus ei ole serveeritud ühest ja samast asukohast.
+const app = express(); //Rida 3 initsialiseerib Express raamistiku (tekib app objekt)
 
 app.use(cors()); //cross origin resource error avoid
 app.use(express.json());
@@ -52,7 +52,51 @@ app.post('/thingamabobs', (req, res) => {
     res.status(201).location('localhost:8080/thingamabobs/' + (thingamabobs.length - 1)).send(newThingy);
 })
 
-//Clients
+
+
+//WIDGETS
+//Patch thingamabobs by id
+app.use(cors());        // Avoid CORS errors in browsers
+app.use(express.json()) // Populate req.body
+
+const widgets = [
+    { id: 1, name: "Cizzbor", price: 29.99 },
+    { id: 2, name: "Woowo", price: 26.99 },
+    { id: 3, name: "Crazlinger", price: 59.99 },
+]
+
+app.get('/widgets', (req, res) => {
+    res.send(widgets)
+})
+
+app.get('/widgets/:id', (req, res) => {
+    if (typeof widgets[req.params.id - 1] === 'undefined') {
+        return res.status(404).send({ error: "Widget not found" })
+    }
+    res.send(widgets[req.params.id - 1])
+})
+
+app.post('/widgets', (req, res) => {
+    if (!req.body.name || !req.body.price) {
+        return res.status(400).send({ error: 'One or all params are missing' })
+    }
+    let newWidget = {
+        id: widgets.length + 1,
+        price: req.body.price,
+        name: req.body.name
+    }
+    widgets.push(newWidget)
+    res.status(201).location('localhost:8080/widgets/' + (widgets.length - 1)).send(
+        newWidget
+    )
+})
+
+app.listen(8080, () => {
+    console.log(`API up at: http://localhost:8080`)
+})
+
+//Tunnitöö
+//CLIENTS
 
 app.get('/clients', (req, res) => {
     res.send(clients);
@@ -125,5 +169,7 @@ app.put('/clients/:id', (req, res) => {
     clients[req.params.id - 1].email = req.body.email;
     res.status(200).send(clients[req.params.id - 1]);
 })
+
+
 
 app.listen(8080, () => {console.log(`API running at http://localhost:8080`)})
