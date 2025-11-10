@@ -73,7 +73,7 @@ app.get('/clients/:id', (req, res) =>
     {
         return res.status(404).send({error:"Object not found. Check your thingamabob id."});
     }
-    
+    return res.send(clients[req.params.id - 1]);
 })
 
 app.delete('/clients/:id', (req, res) => 
