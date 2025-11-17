@@ -11,6 +11,26 @@ const thingamabobs = [
     {id: 3, name: "sapakas", price: 2000}
 ];
 
+const displayCars = [{
+    Car:{
+        CarBrand:"BMW",
+        color:"violet",
+        "Tinted windows":true,
+        wheels: 76,
+    }
+}]
+
+document.getElementById("app").innerHTML = 
+`
+<div id="json">
+<h1> Car properties </h1>
+    <p>Brand of car: ${displayCars[0].Car.CarBrand}</p>
+    <p>Brand of car: ${displayCars[0].Car.color}</p>
+    <p>Brand of car: ${displayCars[0].Car["Tinted windows"]}</p>
+</div>
+`
+
+
 //Get all thingamabobs
 app.get('/thingamabobs', (req, res) => {res.send(thingamabobs)})
 
